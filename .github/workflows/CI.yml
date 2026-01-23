@@ -69,9 +69,6 @@ jobs:
           cmake --build .
           sudo cmake --build . --target install
           cd ../../
-      - name: Set DYLD Library Path (Mac)
-        if: matrix.os == 'macos'
-        run: export DYLD_LIBRARY_PATH=/usr/local/lib/:$DYLD_LIBRARY_PATH
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
@@ -82,6 +79,9 @@ jobs:
       - name: Set Maintainer Mode
         if: ${{ github.event.pull_request }}
         run: export MAINTAINER_MODE=1
+      - name: Set DYLD Library Path (Mac)
+        if: matrix.os == 'macos'
+        run: export DYLD_LIBRARY_PATH=/usr/local/lib/:$DYLD_LIBRARY_PATH
       - name: Test
         run: bundle exec rake
   Memcheck:
