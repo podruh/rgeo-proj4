@@ -54,7 +54,8 @@ jobs:
       - name: Download and Compile Proj
         if: steps.proj-cache.outputs.cache-hit != 'true'
         run: |
-          export CFLAGS=" -std=c99"
+          export CFLAGS="-std=c99"
+          export CXXFLAGS="-std=c++17"
           wget -c https://download.osgeo.org/proj/proj-${{ matrix.proj }}.tar.gz -O - | tar -xz
           cd proj-${{ matrix.proj }}
           mkdir build
