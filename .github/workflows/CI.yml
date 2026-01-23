@@ -79,7 +79,9 @@ jobs:
         if: ${{ github.event.pull_request }}
         run: export MAINTAINER_MODE=1
       - name: Test
-        run: bundle exec rake
+        run: |
+          export DYLD_LIBRARY_PATH=/usr/local/lib/:$DYLD_LIBRARY_PATH
+          bundle exec rake
   Memcheck:
     runs-on: ubuntu-latest
     steps:
