@@ -16,7 +16,8 @@ else
     $CFLAGS << " -DDEBUG" \
                " -Wall" \
                " -ggdb" \
-               " -pedantic"
+               " -pedantic" \
+               " -std=17"
 
     extra_flags = ENV.fetch("MAINTAINER_MODE", ENV.fetch("DEBUG", ""))
     $CFLAGS << " " << extra_flags if extra_flags.strip.start_with?("-")
