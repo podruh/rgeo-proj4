@@ -56,20 +56,19 @@ jobs:
         run: |
           export CFLAGS="-std=c99"
           export CXXFLAGS="-std=c++17"
-          export BUILD_TESTING=OFF
           wget -c https://download.osgeo.org/proj/proj-${{ matrix.proj }}.tar.gz -O - | tar -xz
           cd proj-${{ matrix.proj }}
           mkdir build
           cd build
-          cmake ..
-          cmake --build .
+          cmake -DBUILD_TESTING=OFF ..
+          cmake -DBUILD_TESTING=OFF --build .
           cd ../../
       - name: Install Proj
         run: |
           cd proj-${{ matrix.proj }}/build
-          cmake ..
-          cmake --build .
-          sudo cmake --build . --target install
+          cmake -DBUILD_TESTING=OFF ..
+          cmake -DBUILD_TESTING=OFF --build .
+          sudo cmake -DBUILD_TESTING=OFF --build . --target install
           cd ../../
       - uses: ruby/setup-ruby@v1
         with:
