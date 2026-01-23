@@ -79,11 +79,10 @@ jobs:
       - name: Set Maintainer Mode
         if: ${{ github.event.pull_request }}
         run: export MAINTAINER_MODE=1
-      - name: Set DYLD Library Path (Mac)
-        if: matrix.os == 'macos'
-        run: export DYLD_LIBRARY_PATH=/usr/local/lib/:$DYLD_LIBRARY_PATH
       - name: Test
-        run: bundle exec rake
+        run: |
+          export DYLD_LIBRARY_PATH=/usr/local/lib/:$DYLD_LIBRARY_PATH
+          bundle exec rake
   Memcheck:
     runs-on: ubuntu-latest
     steps:
