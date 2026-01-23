@@ -42,7 +42,7 @@ jobs:
         if: matrix.os == 'ubuntu'
         run: |
           sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
-          sudo apt-get install curl libcurl4-openssl-dev libssl-dev libgeos-dev cmake libtiff
+          sudo apt-get install curl libcurl4-openssl-dev libssl-dev libgeos-dev cmake libtiff-dev
       - name: Install Packages (Mac)
         if: matrix.os == 'macos'
         run: brew install geos cmake
