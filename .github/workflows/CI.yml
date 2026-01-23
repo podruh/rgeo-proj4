@@ -26,7 +26,7 @@ jobs:
         proj:
           - "9.7.1"
           - "9.6.2"
-#          - "8.2.1"
+          - "8.2.1"
 #          - "8.1.1"
 #          - "8.0.1"
 #          - "7.2.1"
@@ -54,6 +54,7 @@ jobs:
       - name: Download and Compile Proj
         if: steps.proj-cache.outputs.cache-hit != 'true'
         run: |
+          export CFLAGS=" -std=99"
           wget -c https://download.osgeo.org/proj/proj-${{ matrix.proj }}.tar.gz -O - | tar -xz
           cd proj-${{ matrix.proj }}
           mkdir build
