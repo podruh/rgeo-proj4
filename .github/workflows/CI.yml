@@ -61,14 +61,14 @@ jobs:
           mkdir build
           cd build
           cmake -DBUILD_TESTING=OFF ..
-          cmake -DBUILD_TESTING=OFF --build .
+          cmake --build .
           cd ../../
       - name: Install Proj
         run: |
           cd proj-${{ matrix.proj }}/build
           cmake -DBUILD_TESTING=OFF ..
-          cmake -DBUILD_TESTING=OFF --build .
-          sudo cmake -DBUILD_TESTING=OFF --build . --target install
+          cmake --build .
+          sudo cmake --build . --target install
           cd ../../
       - uses: ruby/setup-ruby@v1
         with:
