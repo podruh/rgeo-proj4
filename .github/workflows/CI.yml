@@ -42,10 +42,10 @@ jobs:
         if: matrix.os == 'ubuntu'
         run: |
           sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
-          sudo apt-get install curl libcurl4-openssl-dev libssl-dev libgeos-dev cmake libtiff-dev libgtest-dev
+          sudo apt-get install curl libcurl4-openssl-dev libssl-dev libgeos-dev cmake libtiff-dev
       - name: Install Packages (Mac)
         if: matrix.os == 'macos'
-        run: brew install geos cmake libtiff googletest
+        run: brew install geos cmake libtiff
       - uses: actions/cache@v4
         id: proj-cache
         with:
@@ -60,13 +60,13 @@ jobs:
           cd proj-${{ matrix.proj }}
           mkdir build
           cd build
-          cmake -DBUILD_TESTING=OFF ..
+          cmake -DBUILD_TESTING=OFF -DCMAKE_CXX_STANDARD=17 ..
           cmake --build .
           cd ../../
       - name: Install Proj
         run: |
           cd proj-${{ matrix.proj }}/build
-          cmake -DBUILD_TESTING=OFF ..
+          cmake -DBUILD_TESTING=OFF -DCMAKE_CXX_STANDARD=17 ..
           cmake --build .
           sudo cmake --build . --target install
           cd ../../
